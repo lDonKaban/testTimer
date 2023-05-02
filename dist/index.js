@@ -1,0 +1,1 @@
+(()=>{const e=document.querySelector("input"),t=document.querySelector("button"),u=(document.querySelector("span"),e=>{});e.addEventListener("input",(()=>{e.value=e.value.replace(/\D/,"")})),t.addEventListener("click",(()=>{const t=Number(e.value);u(t),e.value=""}))})();

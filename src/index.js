@@ -1,9 +1,16 @@
-import setClock from './modules/setClock';
-
 const inputEl = document.querySelector('input');
 const buttonEl = document.querySelector('button');
 const timerEl = document.querySelector('span');
 let timeInterval;
+
+const setZero = (elem) => {
+  if (elem >= 0 && elem < 10) {
+    return '0' + elem;
+  }
+  return elem;
+};
+
+const isZero = (number) => number === 0;
 
 // Напишите реализацию createTimerAnimator
 // который будет анимировать timerEl
@@ -15,7 +22,16 @@ const createTimerAnimator = () => {
     const timeArray = [hh, mm, ss];
 
     timeInterval = setInterval(() => {
-      setClock(timerEl, timeArray);
+      if (timeArray.filter(e => e !== 0).length === 0) clearInterval(timeInterval); 
+
+      timerEl.innerHTML = timeArray.map(e => setZero(e)).join(':');
+  
+      if (isZero(timeArray[2])) {
+        timeArray[2] = 59;
+        isZero(timeArray[1]) ? (timeArray[1]=59, timeArray[0]--) : timeArray[1]--;
+      } else {
+        timeArray[2]--;
+      }
     }, 1000);
   };
 };
